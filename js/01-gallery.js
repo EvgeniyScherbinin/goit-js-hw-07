@@ -1,8 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-
-
 const galleryItemsEl = document.querySelector('.gallery');
 const cardsGallery = createImageCards(galleryItems);
 
@@ -27,14 +25,20 @@ function createImageCards(galleryItems) {
 
 function onContainer(evt) {
     evt.preventDefault();
-    if (!evt.target.classList.contains('gallery__image')) {
+    if (evt.target.nodeName !== "BUTTON") {
       return;
     }
+
+    const imageUrl = evt.target.dataset.source;
+
+    const modalImage = document.querySelector('.basicLightbox img');
+  modalImage.src = imageUrl;
   
     const instance = basicLightbox.create(`
-      <img src="${evt.target.dataset.source}" width="800" height="600">
-    `);
-  
+    <div class="modal">
+      <img src="${imageUrl}" width="800" height="600">
+    </div>
+  `);
     instance.show();
   };
 
@@ -44,10 +48,10 @@ function onContainer(evt) {
     captionDelay: '250',
   });
   gallery.on('show.simplelightbox', function (evt) {	
-    console.log(evt);
+    // console.log(evt);
   });
   gallery.on('close.simplelightbox', function (evt) {	
-    console.log(evt);
+    // console.log(evt);
   });
   
-console.log(galleryItems);
+// console.log(galleryItems);
