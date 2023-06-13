@@ -1,4 +1,5 @@
 import { galleryItems } from './gallery-items.js';
+
 // Change code below this line
 
 const galleryItemsEl = document.querySelector('.gallery');
@@ -23,35 +24,18 @@ function createImageCards(galleryItems) {
   }).join('');
 };
 
+
 function onContainer(evt) {
-    evt.preventDefault();
-    if (evt.target.nodeName !== "BUTTON") {
-      return;
-    }
+  evt.preventDefault();
+  if (evt.target.nodeName !== "IMG") {
+    return;
+  }
 
-    const imageUrl = evt.target.dataset.source;
-
-    const modalImage = document.querySelector('.basicLightbox img');
-  modalImage.src = imageUrl;
-  
-    const instance = basicLightbox.create(`
-    <div class="modal">
-      <img src="${imageUrl}" width="800" height="600">
-    </div>
+  const instance = basicLightbox.create(`
+    <img src="${evt.target.dataset.source}" alt="${evt.target.alt}" />
   `);
-    instance.show();
-  };
 
+  instance.show();
+};
 
-  let gallery = new SimpleLightbox('.gallery__link', {
-    captionsData: 'alt',
-    captionDelay: '250',
-  });
-  gallery.on('show.simplelightbox', function (evt) {	
-    // console.log(evt);
-  });
-  gallery.on('close.simplelightbox', function (evt) {	
-    // console.log(evt);
-  });
-  
-// console.log(galleryItems);
+console.log(galleryItems);
